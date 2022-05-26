@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.britenet.campus.obj.model.Product;
 import pl.britenet.campus.service.ProductService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,6 +19,11 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @CrossOrigin(origins = "http://localhost:63342")
+    @GetMapping
+    public List<Product> getProducts() {
+        return this.productService.retrieveAll();
+    }
     @GetMapping("/{productId}")
     public Optional<Product> getProduct(@PathVariable int productId) {
         return this.productService.retrieve(productId);
